@@ -1,8 +1,4 @@
-from flask import Flask, redirect, url_for
-
-# redirect: URLにアクセスしたユーザーを別のURLに誘導する
-# url_for
-
+from flask import Flask
 
 app = Flask(__name__)
 
