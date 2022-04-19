@@ -1,3 +1,5 @@
+#render_template: テンプレートの表示し方
+
 from flask import Flask, redirect, url_for, render_template
 
 
