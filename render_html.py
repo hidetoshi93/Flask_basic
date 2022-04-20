@@ -5,9 +5,9 @@ from flask import Flask, redirect, url_for, render_template
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/home')
 def hello_world():
-    return render_template('index.html')
+    return render_template('index.html', content={'Tuan'})
 
 @app.route('/user/admin')
 def hello_admin():
