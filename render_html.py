@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/home')
 def hello_world():
-    return render_template('index.html', content={'Tuan'})
+    return render_template('home.html')
 
 @app.route('/user/admin')
 def hello_admin():
