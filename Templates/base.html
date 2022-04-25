@@ -1,8 +1,8 @@
 <!-- HTML継承
-    1.　base.htmlでページの見本のページ(base.html)を作成
+    1.　base.htmlでページのテンプレート(base.html)を作成
         headで {% block title %} {% endblock %} 宣言
         bodyで {% block content %} {% endblock %} 宣言
-    2. 見本のページによって、新たなページを作成する際はbase.htmlを継承して作成
+    2. テンプレートによって、新たなページを作成する際はbase.htmlを継承して作成
         例としてhome.htmlはbase.htmlを継承する場合下記のようになります。
         {% extends "base.html" %}
         {% block title %} head　内容 {% endblock %}
