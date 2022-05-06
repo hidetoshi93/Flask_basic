@@ -3,6 +3,13 @@
 
 {% block content %}
 <h2>登録</h2>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for m in messages %}
+            <p> {{m}}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 <div style="margin-left: 50px;">
     <form action="#" method="post">
         <label for="">名前</label>
