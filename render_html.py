@@ -1,6 +1,4 @@
 #render_template: テンプレートの表示し方
-
-from unicodedata import name
 from flask import Flask, redirect, url_for, render_template, request
 
 
@@ -11,7 +9,8 @@ def hello_world():
     return render_template('home.html')
 
 # POST, GET method
-@app.route('/login', method=["POST", "GET"])
+# 注意：method　→　methods
+@app.route('/login', methods=["POST", "GET"])
 def login():
     if request.method == "POST":
         user_name = request.form["name"]
