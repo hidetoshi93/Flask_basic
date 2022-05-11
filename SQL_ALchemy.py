@@ -1,4 +1,8 @@
 #render_template: テンプレートの表示し方
+# fix error ImportError: DLL load failed while importing _sqlite3
+# 参考　https://qiita.com/saito-h/items/9c9f73e39ac205c0aebf
+
+
 from flask import Flask, redirect, url_for, render_template, request, session, flash
 from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
@@ -13,6 +17,17 @@ app.permanent_session_lifetime = timedelta(minutes= 1)
 
 db = SQLAlchemy(app)
 
+class User(db.Model):
+    user_id = db.Column(db.Integer, primary_key = True)
+
+    # nameの最長は100
+    name = db.Column(db.String(100))
+    email = db.Column(db.String(100))
+
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+
 @app.route('/home')
 
 @app.route('/')
@@ -24,16 +39,16 @@ def home():
 def login():
     if request.method == "POST":
         user_name = request.form["name"]
+        session.permanent = True
         if user_name:
             session["user"] = user_name
-            session.permanent = True
             flash("You logged in succesfully!", "info")
-            return render_template("user.html", user = user_name)
+            return redirect(url_for("user"))
 
     if "user" in session:
         name = session["user"]
         flash("You have already logged in!", "info")
-        return render_template("user.html", user = name)
+        return redirect(url_for("user"))
 
     return render_template('login.html')
     
@@ -42,7 +57,7 @@ def hello_admin():
     return "<h1> Hello admin!</h1>"
 
 @app.route('/user')
-def  hello_user():
+def  user():
     if "user" in session:
         name = session["user"]
         return render_template("user.html", user = name)
